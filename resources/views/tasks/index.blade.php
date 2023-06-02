@@ -25,7 +25,15 @@
                           <tr>
                             <td class="border-b p-4 pl-8">{{$task->title}}</td>
                             <td class="border-b p-4 pl-8">{{$task->description}}</td>
-                            <td class="border-b p-4 pl-8"></td>
+                            <td class="border-b p-4 pl-8">
+                              <form action="{{ route('tasks.destroy', $task->id) }}" method="POST">
+                                  @csrf
+                                  @method('DELETE')
+                                  <x-danger-button class="ml-3">
+                                    {{ __('Delete') }}
+                                  </x-danger-button>
+                              </form>                              
+                            </td>
                           </tr>                             
                         @endforeach                        
                       </tbody>
