@@ -15,7 +15,7 @@ class TaskController extends Controller
     public function index()
     {
         return view('tasks.index', [
-            'tasks' => Auth::user()->tasks()->paginate(config('pagination.per_page'))
+            'tasks' => Auth::user()->tasks()->orderBy("id", "desc")->paginate(config('pagination.per_page'))
         ]);
     }
 
@@ -24,7 +24,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        return view('tasks.create');
     }
 
     /**
@@ -32,7 +32,8 @@ class TaskController extends Controller
      */
     public function store(StoreTaskRequest $request)
     {
-        //
+        Auth::user()->tasks()->create($request->input());
+        return redirect(route('tasks.index'));
     }
 
     /**
