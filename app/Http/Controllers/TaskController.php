@@ -49,7 +49,9 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        //
+        return view('tasks.edit', [
+          'task' => $task
+        ]);
     }
 
     /**
@@ -57,7 +59,8 @@ class TaskController extends Controller
      */
     public function update(UpdateTaskRequest $request, Task $task)
     {
-        //
+        $task->update($request->input());
+        return redirect(route('tasks.index'));
     }
 
     /**

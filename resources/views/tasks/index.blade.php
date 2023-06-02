@@ -9,9 +9,11 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('tasks.create') }}">
+                    <x-primary-button>
+                    <a class="no-underline text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('tasks.create') }}">
                         {{ __('Create task') }}
                     </a>
+                    </x-primary-button>
                     <table class="border-collapse table-fixed w-full text-sm">
                       <thead>
                         <tr>
@@ -25,8 +27,14 @@
                           <tr>
                             <td class="border-b p-4 pl-8">{{$task->title}}</td>
                             <td class="border-b p-4 pl-8">{{$task->description}}</td>
-                            <td class="border-b p-4 pl-8">
-                              <form action="{{ route('tasks.destroy', $task->id) }}" method="POST">
+                            <td class="border-b p-4 pl-8 inline-flex ">
+                              <x-primary-button>
+                                <a class="no-underline text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('tasks.edit', $task->id) }}">
+                                    {{ __('Edit') }}
+                                </a>
+                              </x-primary-button>
+                                
+                              <form action="{{ route('tasks.destroy', $task->id) }}" method="POST" class="inline">
                                   @csrf
                                   @method('DELETE')
                                   <x-danger-button class="ml-3">
