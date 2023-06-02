@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Task;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -13,7 +14,9 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        return view('tasks.index', [
+            'tasks' => Auth::user()->tasks()->paginate(config('pagination.per_page'))
+        ]);
     }
 
     /**
